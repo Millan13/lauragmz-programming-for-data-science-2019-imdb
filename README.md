@@ -400,4 +400,3 @@ A razón de este punto, se recurrió al comando *split*, pues permite dividir un
 De manera específica, en el archivo Bash *preparacion.sh* los conjuntos de datos title.akas.tsv, title.basics.tsv y title.principals.tsv,
 se procesan con el comando *split* para crear archivos temporales. Tales se aprovechan ver el archivo de Python *imdb.py*
 para que Postgres carga por etapas (véase la función [Pendiente: especificar nombre]).
-
