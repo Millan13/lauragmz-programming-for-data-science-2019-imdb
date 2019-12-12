@@ -18,13 +18,13 @@
 
 ### 0. Introducción
 
-El presente documento expone las consideraciones realizada para el proyecto final del Seminario de Programación sobre la Internet Movie Database (IMDB), considerando las instrucciones que permiten la creación de una base de datos asociada a ésta, su limpieza y conformación de un esquema semantic [Pendiente: cambiar si se incluyen el resto de esquemas] a través de PostgreSQL (Postgres).
+El presente documento expone las consideraciones realizada para el proyecto final del Seminario de Programación sobre la Internet Movie Database (IMDB), considerando las instrucciones que permiten la creación de una base de datos asociada a ésta, su limpieza y conformación de un esquema semantic a través de PostgreSQL (Postgres).
 
-Para consolidar el material desarrollado se creó un repositorio de Github (disponible a través de la dirección electrónica [Pendiente: actualizar]) que sigue la estructura de carpetas sugerida en el curso para el desarrollo de un proyecto.
+Para consolidar el material desarrollado se creó un repositorio de Github (disponible a través de la dirección electrónica https://github.com/lauragmz/lauragmz-programming-for-data-science-2019-imdb) que sigue la estructura de carpetas sugerida en el curso para el desarrollo de un proyecto.
 
 En este sentido, debe entenderse que los diferentes archivos y programas desarrollados (en Bash, Python y Postgres) se encuentran dentro de este directorio de trabajo, con lo cual, para seguir el desarrollo realizado para este proyecto se debe clonar el repositorio en comento para ejecutar el código implementado, lo cual se realiza con la siguiente instrucción:
 ```
-git clone [Pendiente: actualizar dirección electrónica]
+git clone https://github.com/lauragmz/lauragmz-programming-for-data-science-2019-imdb
 ```
 
 Es así que a continuación se expondrá el enfoque seguido para el desarrollo del proyecto en comento.
@@ -193,7 +193,7 @@ estructuras de datos básicas para *raw*, denominadas *title_akas*, *title_basic
 
 Para importar los datos de la base IMDB desde los correspondientes archivos pre-procesados .tsv (ver sección 5.2 y Anexo A) sobre las estructuras datos básicas del paso anterior, se implementó un procedimiento dentro de Python que realiza dicho procedimiento archivo por archivo, de manera secuencial, sin problemas de errores de memoria o reconocimiento incorrecto del número de columnas por cada renglón.
 
-En concreto, tal corresponde a las funciones [Pendiente: incluir nombres de las funciones] que se localizan el en archivo [Pendiente: nombre].py (para mayor detalle sobre este archivo).
+En concreto, tal corresponde a la función *load_imdb* que se localizan el en archivo imdb.py (para mayor detalle sobre este archivo).
 
 Como resultado, las estructuras de datos del esquema creados previamente se llenan con los datos de los archivos .tsv correspondientes, donde todos los campos se encuentran como atributos de texto.
 
@@ -209,7 +209,7 @@ las siguientes acciones de limpieza de las sietes estructuras. En términos gene
 * Se eliminaron acentos (correspondientes a los caracteres "\`" y "\´"),
 * [Pendiente: añadir más en caso de que se agreguen; en caso contrario eliminar bullet]
 
-El detalle específico de uso de estas acciones sobre las siete estructuras de datos de IMBD se refleja en el archivo *to_cleaned.sql*.
+El detalle específico de uso de estas acciones sobre las siete estructuras de datos de IMBD se refleja en los archivos *to_cleaned1.sql*, *to_cleaned2.sql* y *to_cleaned3.sql*.
 
 #### 4.6 Creación de semantic
 
@@ -235,7 +235,7 @@ Para instalar los componentes necesarios para el proyecto, se consideraron las s
 
 #### 5.1 Creación de un ambiente Python 3.7.3. con Pyenv
 
-A través de *Pyenv* se crea un entorno virtual basado en Python 3.7.3 (que se denominará *imbd*), que incluirá los paquetes *psycopg2*, *click* y *dynaconf*. Para ello se implementó al archivo Bash denominado *preparacion.sh* que permité ingresar de manera automática a este cuando el usuario se situé con la terminal en el directorio de trabajo.
+A través de *Pyenv* se crea un entorno virtual basado en Python 3.7.3 (que se denominará *imbd*), que incluirá los paquetes *psycopg2*, *click* y *dynaconf*. Para ello se implementó al archivo Bash denominado *setting_pyenv.sh* que permite ingresar de manera automática a este cuando el usuario se situé con la terminal en el directorio de trabajo.
 
 En así que para crear tal ambiente con Pyenv, desde el directorio principal del proyecto, el usuario deberá ingresar las siguientes instrucciones:
 
@@ -263,6 +263,8 @@ En este sentido, la descarga de los datos y el pre-procesamiento para facilitar 
 **Descarga de datos: paso 2**
 
 ```
+cd /bin
+chmod +x preparacion.sh # Otorgamos permisos de ejecucion
 ./preparacion.sh # Script para descarga de datos IMDB, extraccion y pre-procesamiento para carga a Postgres
 ```
 
@@ -296,13 +298,15 @@ En este sentido, para ejecutar esta etapa desde la carpeta de trabajo principal 
 **Creación de base de datos y usuario: Paso 3**
 
 ```
+cd sql
 sudo su postgres # cambiamos el usuario a Postgres
 psql -f preparar_base.sql # ejecutamos el archivo que permite la creacion de la base y el rol descritos
+exit
 ```
 
 #### 6.2 Creación de esquemas
 
-La creación los esquemas raw, cleaned y semantic escrita en el numeral 4.2, se efectua ejecutando la siguiente instrucción:
+La creación los esquemas raw, cleaned y semantic escrita en el numeral 4.2, se efectúa ejecutando la siguiente instrucción:
 
 **Creación de esquemas: Paso 4**
 
@@ -323,12 +327,10 @@ python imdb.py create-raw-tables
 
 Posteriormente, la carga de conjuntos de datos IMDB hacia las estructuras de tablas obtenidas en el paso previo, las cuales se abordan en numeral 4.4, se efectúa mediante la instrucción:
 
-[Pendiente: cambiar al nombre de la función que usa Marco]
-
 **Carga del conjuntos de datos IMDB a raw: Paso 6**
 
 ```
-python imdb.py load-[Pendiente: cambiar al nombre de la función que usa Marco]
+python imdb.py load-imdb
 ```
 
 Notas: Se reitera que aunque el tiempo de ejecución depende de diversos factores en los ejercicios para el desarrollo del presente proyecto el tiempo aproximado de carga desde .tsv hacia raw fue cercano a 11 minutos.
@@ -340,12 +342,14 @@ En adición, la limpieza de la base IMDB desde la fase raw se lleva a cabo media
 **Creación de cleaned: Paso 7**
 
 ```
-python imdb.py to-cleaned
+python imdb.py to-cleaned1 # primera funcion de limpieza
+python imdb.py to-cleaned2 # segunda funcion de limpieza
+python imdb.py to-cleaned2 # tercera funcion de limpieza
 ```
 
 #### 6.6 Creación de semantic
 
-Por lo que hace a la creación del esquema semantic, dicha etapa se realiza con base en los elementos expuestos en la sección 4.6, con base enla instrucción:
+Por lo que hace a la creación del esquema semantic, dicha etapa se realiza con base en los elementos expuestos en la sección 4.6, con base en la instrucción:
 
 **Creación de semantic: Paso 8**
 
@@ -399,4 +403,4 @@ A razón de este punto, se recurrió al comando *split*, pues permite dividir un
 
 De manera específica, en el archivo Bash *preparacion.sh* los conjuntos de datos title.akas.tsv, title.basics.tsv y title.principals.tsv,
 se procesan con el comando *split* para crear archivos temporales. Tales se aprovechan ver el archivo de Python *imdb.py*
-para que Postgres carga por etapas (véase la función [Pendiente: especificar nombre]).
+para que Postgres carga por etapas (véase la función *load_imdb*).
