@@ -171,14 +171,14 @@ base de datos denominada **bd_IMDB**, mientras que el rol será **rol_IMDB** cuy
 
 #### 4.2 Creación de esquemas
 
-Para crear los esquemas que se usan con la base de datos IMDB, se implementó el archivo *create_schemas.sql* el cual se encarga  indicar a Postgres la creación de esquemas denominados *raw*, *cleaned* y *semantic* [Pendiente: modificar si se añaden más] que se emplearán en etapas posteriores.
+Para crear los esquemas que se usan con la base de datos IMDB, se implementó el archivo *create_schemas.sql* el cual se encarga de indicar a Postgres la creación de esquemas denominados *raw*, *cleaned* y *semantic* que se emplearán en etapas posteriores.
 
 #### 4.3 Creación de raw tables
 
 En complemento, para declarar las estructuras de datos básicas que conforman al esquema *raw* y sobre las cuales se importarán posteriormente los datos de IMDB a partir de los archivos .tsv mencionados previamente, por cada uno de los siete conjuntos de datos
 de dicha base se creó un estructura de datos básica con base en lo siguiente:
 
-* Se cambiaron los nombres de las tablas originales pues usaban a puntos como separadores para sustituirlos por guiones bajos (por ejemplo, la tabla originalmente denominada como *title.crew* se representó como *title_crew* para Postgres).
+* Se cambiaron los nombres de las tablas originales pues usaban puntos como separadores, en su lugar se emplearon guiones bajos (por ejemplo, la tabla originalmente denominada como *title.crew* se representó como *title_crew* para Postgres).
 
 * La representación de una tabla de IMDB dentro de Postgres contiene el mismo número de atributos que el correspondiente archivo .tsv, usando las mismas denominaciones pasando a minúsculas los encabezados de los campos pero estableciendo su contenido como tipo texto.
 

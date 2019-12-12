@@ -127,5 +127,14 @@ def to_cleaned3(ctx):
         cur.execute(query)
 
 
+@imdb.command()
+@click.pass_context
+def to_semantic(ctx):
+    query = ctx.obj['queries'].get('to_semantic')
+    conn = ctx.obj['conn']
+    with conn.cursor() as cur:
+        cur.execute(query)
+
+
 if __name__ == '__main__':
     imdb()
