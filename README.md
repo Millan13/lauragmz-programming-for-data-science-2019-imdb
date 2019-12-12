@@ -35,6 +35,8 @@ IMDB contiene información relacionada con diferentes medios de entretenimiento 
 
 De acuerdo a la documentación, dicha base se integra por siete conjuntos de datos denominados i) title_basics, ii) title_akas, iii) title_crew, iv) title_episode, v) title_principals, vi) title_ratings y vii) name_basics; los cuales se actualizan de manera diaria y que se encuentran disponibles para su descarga en la dirección electrónica https://datasets.imdbws.com/.
 
+**Nota:** Cabe destacar que debido a las actualizaciones diarias de la base de datos IMBD a veces se presentan problemas para la descarga de los datos de manera automatizada, por esta razón se decidió emplear un corte de la información en su versión más reciente a la elaboración del proyecto los cuales se alojaron dentro de una cuenta en Google Drive. Sin embargo, si se desea realizar el ejercicio con la base presente en https://datasets.imdbws.com/, se deberán descomentar las líneas 7 a 13 del archivo preparación.sh, y comentar las líneas 16 a 22.
+
 A continuación se ofrece un resumen del contenido de tales conjuntos de datos:
 
 * **title_basics:** describe características especiales de los títulos de las películas; tales como el tipo del título, el título más popular, el título original, la clasificación adulto o no, los años de inicio  y fin (en caso de las series de televisión), la duración y el género.
@@ -189,11 +191,11 @@ estructuras de datos básicas para *raw*, denominadas *title_akas*, *title_basic
 
 #### 4.4 Carga de conjuntos de datos IMDB a raw
 
-Para importar los datos de la base IMDB desde los correspondientes archivos pre-procesados .tsv (ver sección 5.2 y Anexo A) sobre las estructuras datos básicas del paso anterior, se implementó un procedimiento dentro de Python que realiza dicho procedimiento archivo por archivo, de manera secuencial, sin problemas de errores de memoria o reconocimiento incorrecto del número de columnas por cada renglón.
+Para importar los archivos .tsv que han sido pre-procesados en la sección precedente (para mayor detalle ver también sección 5.2 y Anexo A), se implementó un procedimiento dentro de Python que realiza dicho acción de manera secuencial, es decir cargando archivo por archivo para evitar problemas de errores de memoria insuficiente o reconocimiento incorrecto del número de columnas por cada renglón.
 
-En concreto, tal corresponde a la función *load_imdb* que se localizan el en archivo imdb.py (para mayor detalle sobre este archivo).
+La función *load_imdb* que realiza lo anterior se localiza el en archivo imdb.py.
 
-Como resultado, las estructuras de datos del esquema creados previamente se llenan con los datos de los archivos .tsv correspondientes, donde todos los campos se encuentran como atributos de texto.
+Como resultado, las estructuras de datos del esquema raw se llenan con los archivos .tsv correspondientes, donde todos los campos se encuentran como atributos de texto.
 
 #### 4.5 Creación de cleaned
 
@@ -235,18 +237,19 @@ Para instalar los componentes necesarios para el proyecto, se consideraron las s
 
 A través de *Pyenv* se crea un entorno virtual basado en Python 3.7.3 (que se denominará *imbd*), que incluirá los paquetes *psycopg2*, *click* y *dynaconf*. Para ello se implementó al archivo Bash denominado *setting_pyenv.sh* que permite ingresar de manera automática a este cuando el usuario se situé con la terminal en el directorio de trabajo.
 
-En así que para crear tal ambiente con Pyenv, desde el directorio principal del proyecto, el usuario deberá ingresar las siguientes instrucciones:
+Es así que para crear tal ambiente con Pyenv, desde el directorio principal del proyecto, el usuario deberá ingresar las siguientes instrucciones:
 
 **Instalación de ambiente virtual: paso 1**
 
 ```
+cd bin
 chmod +x setting_pyenv.sh # Permisos de ejecucion
 ./setting_pyenv.sh # Ejecuta el script de configuracion para el ambiente virtual
 ```
 
 #### 5.2 Descarga de datos IMDB y pre-pocesamiento
 
-Por otra parte, siguiendo la documentación de IMDB, las direcciones electrónicas para obtener una versión comprimida (en formato .gz) del conjunto de datos de esta base se encuentran en https://datasets.imdbws.com/, cuyo tamaño agregado es cercano a los 376 MB, por lo cual se decidió crear un archivo de Bash que facilite su descarga de manera automática con la herramienta *wget* y su extracción con la herramienta *gunzip*.
+Por otra parte, siguiendo la documentación de IMDB, las direcciones electrónicas para obtener una versión comprimida (en formato .gz) del conjunto de datos de esta base se encuentran en https://datasets.imdbws.com/, cuyo tamaño agregado es cercano a los 376 MB, por lo cual se decidió crear un archivo de Bash que facilite su descarga de manera automática con la herramienta *curl* y su extracción con la herramienta *gunzip*.
 
 Cabe destacar que, durante el proceso de exploración esta información para consolidar el esquema raw se encontraron algunos problemas para el funcionamiento de Postgres:
 
@@ -254,7 +257,7 @@ i) **Errores de carga por presencia de caracteres "\N" o doble comilla ("):** Se
 
 ii) **Errores de carga en archivo que exceden cierto tamaño:** tres de los conjuntos de datos de IMDB exceden los 900 MB, por lo que el equipo en el que se trabajó (Vagrant) se quedaba sin memoria.
 
-A razón de estos puntos, el cuerpo de los archivos .tsv que integran la base IMDB se sometió a un proceso de sustitución de caracteres y  división de ciertos archivos para ejecutar un proceso de carga sin errores (secuencial en el segundo caso) con Postgres,, cuyo detalle se describe en el Anexo A al final del presente documento.
+A razón de estos puntos, el cuerpo de los archivos .tsv que integran la base IMDB se sometió a un proceso de sustitución de caracteres y  división de ciertos archivos para ejecutar un proceso de carga sin errores (secuencial en el segundo caso) con Postgres, cuyo detalle se describe en el Anexo A al final del presente documento.
 
 En este sentido, la descarga de los datos y el pre-procesamiento para facilitar su importación en Postgres de la etapa raw se logra ejecutando las siguientes instrucciones desde la carpeta de trabajo principal del proyecto:
 
@@ -272,7 +275,7 @@ Notas: Aunque el tiempo de ejecución depende de diversos factores, como la velo
 
 ### 6. Ejecución
 
-**Notas:** 1) La ejecución del pipeline descrito en la sección 4, se basa en que previamente se han realizado los pasos de instalación descritos a través de la sección 5, y 2) A menos que se indique lo contrario, los archivos .sql , que se mencionan en esta sección se encontrarán ubicados en la carpeta *sql*.
+**Notas:** a) La ejecución del pipeline descrito en la sección 4, se basa en que previamente se han realizado los pasos de instalación descritos a través de la sección 5; y b) A menos que se indique lo contrario, los archivos .sql , que se mencionan en esta sección se encontrarán ubicados en la carpeta *sql*.
 
 Para llevar a cabo pipeline en cuestión, se implementó un archivo en Python denominado *imbd.py* que permite realizar de manera secuencial cada una de sus etapas (es decir, desde 4.1 hasta 4.6) de manera interactiva en la terminal. En términos generales, este archivo funciona a través de lo siguiente:
 
@@ -281,15 +284,16 @@ que queremos crear juntos con los esquemas correspondientes.
 * A través de Python ordenamos ejecutar la etapas descritas en secciones 4.1 a 4.6 del presente documento; de manera específica los
  archivos .sql descritos en el pipeline se ejecutan desde Python hacia Postgres usando psycopg2.
 
-Es necesario señalar que para la ejecución del pipeline las instrucciones descritas a continuación se deben realizar desde la terminal situada en la carpeta de trabajo principal del proyecto se debe ejecuta, que tras llevar a cabo el proceso de instalación descrito en la sección 5, debe tener activa de manera automática el entorno virtual de Pyenb denominado *imbd*.
-
-A continuación se describirá los pasos necesarios para ejecutar cada etapa del pipeline para IMDB.
+Es necesario señalar que para la ejecución del pipeline, el usuario situarse con la terminal dentro de la carpeta principal del proyecto
+En este tenor, acontinuación se describirá los pasos necesarios para ejecutar cada etapa del pipeline para IMDB.
 
 #### 6.1 Creación de la base de datos y rol
 
-En línea con lo expresado en la sección 4.1, para establecer dentro de Postgres la base de datos que se va a trabajar para IMDB así como la creación de un rol que tenga permisos de administración sobre la misma, lo cual se refleja en el archivo *preparar_base.sql* el cual se encarga realizar tales acciones creando una base de datos denominada **bd_IMDB**, mientras que el rol será **rol_IMDB** cuyo password es **1234**.
+En línea con lo expresado en la sección 4.1, es necesario crear una base de datos y un rol que tenga permisos de administración sobre la misma.
 
-Para poder indicarle a Python y Postgres esta información en pasos posteriores, dentro de la carpeta *config* se encuentra el archivo *settings.toml* que posee los datos de dicha base y rol, así como la carpeta donde se tienen los datos de IMDB.
+Esto se realiza a través de una serie de instrucciones dentro del archivo *preparar_base.sql*, el cual se encarga realizar tales acciones creando una base de datos denominada **bd_IMDB**, mientras que el rol será **rol_IMDB** cuyo password es **1234**.
+
+Cabe destacar que para poder indicarle a Python y Postgres esta información en pasos posteriores, dentro de la carpeta *config* se encuentra el archivo *settings.toml* que posee los datos de dicha base y rol, así como la carpeta donde se tienen los datos de IMDB.
 
 En este sentido, para ejecutar esta etapa desde la carpeta de trabajo principal del proyecto se debe ejecutar:
 
@@ -335,14 +339,14 @@ Notas: Se reitera que aunque el tiempo de ejecución depende de diversos factore
 
 #### 6.5 Creación de cleaned
 
-En adición, la limpieza de la base IMDB desde la fase raw se lleva a cabo mediante los principios descritos en la sección 4.6, a través de la instrucción:
+En adición, la limpieza de la base IMDB desde la fase raw se lleva a cabo mediante los principios descritos en la sección 4.6, a través de las instrucciones:
 
 **Creación de cleaned: Paso 7**
 
 ```
 python imdb.py to-cleaned1 # primera funcion de limpieza
 python imdb.py to-cleaned2 # segunda funcion de limpieza
-python imdb.py to-cleaned2 # tercera funcion de limpieza
+python imdb.py to-cleaned3 # tercera funcion de limpieza
 ```
 
 #### 6.6 Creación de semantic
