@@ -40,10 +40,10 @@ begin
 			AND names.name = crew.director
   );
   
-  create index semantic_events_startyear_ix on semantic.events(startyear);
-  create index semantic_events_genre_ix on semantic.events(genre);
-  create index semantic_events_season_ix on semantic.events(season);
-  create index semantic_events_episode_ix on semantic.events(episode);
+--  create index semantic_events_startyear_ix on semantic.events(startyear);
+--  create index semantic_events_genre_ix on semantic.events(genre);
+--  create index semantic_events_season_ix on semantic.events(season);
+--  create index semantic_events_episode_ix on semantic.events(episode);
 
   end $semantic$;
 

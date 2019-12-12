@@ -1,4 +1,4 @@
-# Tarea - Programación para Ciencia de Datos
+# Proyecto Final - Programación para Ciencia de Datos
 
 
 **Profesor:** Adolfo de Unanúe Tiscareño
@@ -22,7 +22,7 @@ El presente documento expone las consideraciones realizadas para el proyecto fin
 
 Para consolidar el material desarrollado se creó un repositorio de Github (disponible a través de la dirección electrónica https://github.com/lauragmz/lauragmz-programming-for-data-science-2019-imdb) que sigue la estructura de carpetas sugerida en el curso para el desarrollo de un proyecto.
 
-En este sentido, debe entenderse que los diferentes archivos y programas desarrollados (en Bash, Python y Postgres) se encuentran dentro de este directorio de trabajo, con lo cual, para seguir el desarrollo realizado para este proyecto se debe clonar el repositorio en comento para ejecutar el código implementado, lo cual se realiza con la siguiente instrucción:
+En este sentido, debe entenderse que los diferentes archivos y programas desarrollados (en Bash, Python y Postgres) se encuentran dentro de este directorio de trabajo, con lo cual, para seguir el desarrollo realizado para este proyecto se debe clonar el repositorio en cuestión para ejecutar el código implementado, lo cual se realiza con la siguiente instrucción:
 ```
 git clone https://github.com/lauragmz/lauragmz-programming-for-data-science-2019-imdb
 ```
