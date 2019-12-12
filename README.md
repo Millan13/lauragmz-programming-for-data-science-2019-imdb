@@ -18,7 +18,7 @@
 
 ### 0. Introducción
 
-El presente documento expone las consideraciones realizada para el proyecto final del Seminario de Programación sobre la Internet Movie Database (IMDB), considerando las instrucciones que permiten la creación de una base de datos asociada a ésta, su limpieza y conformación de un esquema semantic a través de PostgreSQL (Postgres).
+El presente documento expone las consideraciones realizadas para el proyecto final del Seminario de Programación sobre la Internet Movie Database (IMDB), considerando las instrucciones que permiten la creación de una base de datos asociada a ésta, su limpieza y conformación de un esquema semantic a través de PostgreSQL (Postgres).
 
 Para consolidar el material desarrollado se creó un repositorio de Github (disponible a través de la dirección electrónica https://github.com/lauragmz/lauragmz-programming-for-data-science-2019-imdb) que sigue la estructura de carpetas sugerida en el curso para el desarrollo de un proyecto.
 
@@ -31,9 +31,9 @@ Es así que a continuación se expondrá el enfoque seguido para el desarrollo d
 
 ### 1. Descripción de la fuente de datos
 
-IMDB contiene información relacionada diferentes medios de entretenimiento visual, tales como películas, programas de televisión y video juegos; incluyendo casting, equipo de producción, biografías personales; así como información sobre los raitings (véase https://www.imdb.com/interfaces/#plain).
+IMDB contiene información relacionada con diferentes medios de entretenimiento visual, tales como películas, programas de televisión y video juegos; incluyendo casting, equipo de producción, biografías personales; así como información sobre los raitings (véase https://www.imdb.com/interfaces/#plain).
 
-De acuerdo a la documentación, dicha base se integra por siete conjuntos de datos denominados i) title_basics, ii) title_akas, iii) title_crew, iv) title_episode, v) title_principals, vi) title_ratings y vii) name_basics; los cuales se actualizan de manera diaria y que se encuentran disponibles para su descarga en la https://datasets.imdbws.com/.
+De acuerdo a la documentación, dicha base se integra por siete conjuntos de datos denominados i) title_basics, ii) title_akas, iii) title_crew, iv) title_episode, v) title_principals, vi) title_ratings y vii) name_basics; los cuales se actualizan de manera diaria y que se encuentran disponibles para su descarga en la dirección electrónica https://datasets.imdbws.com/.
 
 A continuación se ofrece un resumen del contenido de tales conjuntos de datos:
 
@@ -49,7 +49,7 @@ A continuación se ofrece un resumen del contenido de tales conjuntos de datos:
 
 * **title_ratings:** referente a los raitings y votos de las películas,a través  del peso promedio de todos los individuos que usan raitings; así como el número de votos que el título ha recibido.
 
-* **name_basics:** contiene la información principal de los actores, en términos del nombre por el cual la persona es "most often credited", año de nacimiento, año de muerte, el top-3 de las profesiones de las personas y títulos por los cuáles la persona es conocida.
+* **name_basics:** contiene la información principal de actores, directores, escritores y demás involucrados en los títulos, en términos del nombre por el cual la persona es "most often credited", año de nacimiento, año de muerte, el top-3 de las profesiones de las personas y títulos por los cuáles la persona es conocida.
 
 
 ### 2. Descripción de la entidad
@@ -58,8 +58,6 @@ A continuación se ofrece un resumen del contenido de tales conjuntos de datos:
 [Pendiente: Describir entidades y eventos]
 
 Un punto que puede ser relevante para estudio, es con base en [...] realizar predicciones del éxito obtenido por
-
-
 
 ### 3. Estructura de la base de datos
 
@@ -159,16 +157,16 @@ Nota: dicho diagrama también se encuentra disponible para su consulta a través
 
 ### 4. Pipeline
 
-A continuación se describirán las etapas consideradas para realizar la creación de la base de datos, su limpieza y posterior inicio del esquema semantic [Pendiente: modificar si se incluye features, labels y cohorts]. Por otro lado, los pasos necesarios para ejecutar este pipeline se abordarán en las secciones 5 y 6 el presente documento.
+A continuación se describirán las etapas consideradas para realizar la creación de la base de datos, su limpieza y posterior inicio del esquema semantic. Cabe destacar que las instrucciones para la ejecución del pipeline se detallan en las secciones 5 y 6, siendo la primera de éstas la que se avoca a  dar los pasos para la descarga del conjunto de datos IMDB.
 
-**Notas:** 1) Para facilitar el entendimiento el pipeline descrito asume que ya se cuenta con el conjunto de datos de IMDB, cuyas instrucciones se abordan en la siguiente sección; y 2) a menos que se indique lo contrario, los archivos .sql , que se mencionan en esta sección se encontrarán ubicados en la carpeta *sql*.
+**Notas:** 1) a menos que se indique lo contrario, los archivos .sql , que se mencionan en esta sección se encontrarán ubicados en la carpeta *sql*.
 
 #### 4.1 Creación de la base de datos y rol
 
 El primer punto consiste en establecer dentro de Postgres la base de datos que se va a trabajar para IMDB así como la creación
 de un rol que tenga permisos de administración sobre la misma.
 
-Para fines de este proyecto, se implementó el archivo *preparar_base.sql* el cual se encarga realizar tales acciones creando una
+Para fines de este proyecto, se implementó el archivo *preparar_base.sql* el cual se encarga de realizar tales acciones creando una
 base de datos denominada **bd_IMDB**, mientras que el rol será **rol_IMDB** cuyo password es **1234**.
 
 #### 4.2 Creación de esquemas
