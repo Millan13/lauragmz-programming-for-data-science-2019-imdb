@@ -9,35 +9,6 @@ begin
 
   set search_path = semantic, public;
   
-  /******************* entities *******************/
-
-  raise notice 'populating entities';
-  drop table if exists semantic.entities;
-  
-  create table if not exists semantic.entities as (
-	SELECT DISTINCT
-		names.primaryname,
-		names.birth,
-		names.primaryprofession,
-		AVG(ratings.rating) ratingavg
-	FROM
-		cleaned.titles titles,
-		cleaned.episodes episodes,
-		cleaned.ratings ratings,
-		cleaned.crew crew,
-		cleaned.names names
-	WHERE
-		type = 'tvseries'
-			AND episodes.parent = titles.title
-			AND ratings.title = episodes.title
-			AND crew.title = episodes.title
-			AND names.name = crew.director
-	GROUP BY names.primaryname , names.birth , names.primaryprofession
-  );
-  
-  create index semantic_entities_birth_ix on semantic.entities(birth);
-  create index semantic_entities_primaryprofession_ix on semantic.entities(primaryprofession);
-  
   /******************* events *******************/
   
   raise notice 'defining event types';

@@ -56,38 +56,59 @@ A continuación se ofrece un resumen del contenido de tales conjuntos de datos:
 
 ### 2. Descripción de la entidad
 
+En la industria del entretenimiento uno de los puestos más relevantes es el del director, dado que esta persona se encarga de la organización de organizar todas las actividades que soportan la pre-producción, rodaje y post-producción de una obra, como el estudio del guión, la selección de locaciones de filmación, edición, entre otras. Tales actividades son determinantes para el recibimiento del público y su éxito comercial.
 
-[Pendiente: Describir entidades y eventos]
+En tal sentido, la elección de una persona apropiada para el puesto de director en un factor relevante a considerar sobre el impacto de una obra de entretenimiento y su triunfo, que típicamente si mide en el nivel de raiting.
 
-Un punto que puede ser relevante para estudio, es con base en [...] realizar predicciones del éxito obtenido por
+Con ello en mente, se puede plantear un esquema que permita a los tomadores de decisiones, encarnados por los productores de contenido (televisoras, plataformas digitales, estudios de cine) predecir el nivel de raiting que tendrá el capítulo de serie bajo la tutela de un director en una ventana de tiempo, dada la elección de una persona específica en su dirección, para evaluar si vale la pena abordar un proyecto, junto con los riesgos asociados a su inversión.
+
+De todo lo anterior, se plantea que considerar a los directores de series como entidades que sirvan para modelar este problema específico, sobre un periodo de interés.
+
+Al respecto, de acuerdo a la información de IMDB, para dicha entidades las características estáticas que pueden considerar son:
+
+* Nombre del director,
+* Año de nacimiento,
+* *Primary profesion*, el conjunto de actividades principales que desarrollar en las obras de entrentenimiento,
+* El valor promedio de sus raitings.
+
+Por otra lado, en una ventana de tiempo, los eventos que les ocurren a las entidades, es decir a si tales dirigieron el capítulo de una serie específica en función de:
+
+* el nombre de la serie,
+* el año que inició y término de la serie,
+* el año del término de cada capítulo,
+* el número de la temporada y el episodio correspondiente,
+* el género de la serie,
+* si la serie es para adultos.
+
+Lo anterior, se propone como información que puede ser relevante para predecir el nivel de raiting que tendrá el capítulo de una serie bajo la dirección de una persona.
 
 ### 3. Estructura de la base de datos
 
 De acuerdo a la información proporcionada para IMDB (ver https://www.imdb.com/interfaces/#plain), así como derivado del análisis de los conjuntos de datos de ésta, se tiene que la información en cuestión se puede describir como:
 
 
-**Cuadro 1:** Tabla describiendo las columnas de la relación *title_akas*, [Pendiente: decidir si nombramos por tabla y archivo]
+**Cuadro 1:** Tabla describiendo las columnas de la relación *title_akas*,
 
 | elemento   | descripción                                            | observación                                                                     |
 |------------|--------------------------------------------------------|---------------------------------------------------------------------------------|
-| titleid      | identificador del títutlo                              |                                                                                 |
+| titleid      | identificador del título                              |                                                                                 |
 | ordering   | identificador de las filas de un título                |                                                                                 |
 | title  | nombre adaptado del ttulo                              |                                                                                 |
-| region     | region de la versión del título adaptado               |                                                                                 |
+| region     | región de la versión del título adaptado               |                                                                                 |
 | language   | idioma del título adaptado                             |                                                                                 |
-| types      | conjunto de atributos del títutlo adaptado             | posibles valores "alternative", "dvd", "festival", "tv", "video", "working",etc |
-| atributes  | terminos adicioanles para describir el título adaptado |                                                                                 |
+| types      | conjunto de atributos del título adaptado             | posibles valores "alternative", "dvd", "festival", "tv", "video", "working",etc |
+| atributes  | términos adicionales para describir el título adaptado |                                                                                 |
 | isoriginaltitle | indica si el título adaptado corresponde al original   | posibles valores "0 : not original title", "1: original title"                  |
 
 
-**Cuadro 2:** Tabla describiendo las columnas de la relación *title_basics*, [Pendiente: decidir si nombramos por tabla y archivo]
+**Cuadro 2:** Tabla describiendo las columnas de la relación *title_basics*,
 
 | **elemento**   | **descripción**                | **observación**                                                         |
 |----------------|--------------------------------|-------------------------------------------------------------------------|
 | tconst          | identificador del títutlo      |                                                                         |
 | titletype      | tipo o formato del título      | posibles valores "movie", "short", "tvseries", "tvepisode", "video",etc |
 | primarytitle   | nombre más popular del título  |                                                                         |
-| originaltitle  | títutlo en el idioma original  |                                                                         |
+| originaltitle  | título en el idioma original  |                                                                         |
 | isadult        | clasificador del título        | posibles valores "0: no adulto", "1: adulto"                            |
 | startyear      | año de realización del título  | en el caso de "tvseries" corresponde al año de inicio                   |
 | endyear        | año de termino de "tvseries"   |                                                                         |
@@ -96,7 +117,7 @@ De acuerdo a la información proporcionada para IMDB (ver https://www.imdb.com/i
 
 
 
-**Cuadro 3:** Tabla describiendo las columnas de la relación *title_crew*, [Pendiente: decidir si nombramos por tabla y archivo]
+**Cuadro 3:** Tabla describiendo las columnas de la relación *title_crew*,
 
 | **elemento** | **descripción**            | **observación** |
 |--------------|----------------------------|-----------------|
@@ -107,7 +128,7 @@ De acuerdo a la información proporcionada para IMDB (ver https://www.imdb.com/i
 
 
 
-**Cuadro 4:** Tabla describiendo las columnas de la relación *title_episode*, [Pendiente: decidir si nombramos por tabla y archivo]
+**Cuadro 4:** Tabla describiendo las columnas de la relación *title_episode*,
 
 
 | **elemento**  | **descripción**                                    | **observación** |
@@ -118,7 +139,7 @@ De acuerdo a la información proporcionada para IMDB (ver https://www.imdb.com/i
 | episodenumber | número de episodio en la "tvseries"                |                 |
 
 
-**Cuadro 5:** Tabla describiendo las columnas de la relación *title_principals*, [Pendiente: decidir si nombramos por tabla y archivo]
+**Cuadro 5:** Tabla describiendo las columnas de la relación *title_principals*,
 
 | **elemento** | **descripción**                                    | **observación**               |
 |--------------|----------------------------------------------------|-------------------------------|
@@ -129,7 +150,7 @@ De acuerdo a la información proporcionada para IMDB (ver https://www.imdb.com/i
 | job          | trabajo específico de la persona                   |                               |
 | characters   | nombre del personaje representado                  | en caso de resultar aplicable |
 
-**Cuadro 6:** Tabla describiendo las columnas de la relación *title_ratings*, [Pendiente: decidir si nombramos por tabla y archivo]
+**Cuadro 6:** Tabla describiendo las columnas de la relación *title_ratings*,
 
 | **elemento**  | **descripción**                                         | **observación** |
 |---------------|---------------------------------------------------------|-----------------|
@@ -137,13 +158,13 @@ De acuerdo a la información proporcionada para IMDB (ver https://www.imdb.com/i
 | averagerating | promedio ponderado de los ratings de todos los usuarios |                 |
 | numvotes      | número de votos por título                              |                 |
 
-**Cuadro 7:** Tabla describiendo las columnas de la relación *name_basics*, [Pendiente: decidir si nombramos por tabla y archivo]
+**Cuadro 7:** Tabla describiendo las columnas de la relación *name_basics*,
 
 | **elemento**      | **descripción**                            | **observación**                    |
 |-------------------|--------------------------------------------|------------------------------------|
 | nconst              | identificador de la persona                |                                    |
 | primaryname       | nombre más popular de la persona           |                                    |
-| birthyear         | año de nacimento de la persona             | en formato YYYY                    |
+| birthyear         | año de nacimiento de la persona             | en formato YYYY                    |
 | deathyear         | año de muerte de la persona                | en formato YYYY, en caso aplicable |
 | primaryprofession | top 3 de profesiones de la persona         |                                    |
 | knownfortitles    | títulos por los que la persona es conocida |                                    |
@@ -203,31 +224,62 @@ Para crear una versión limpia de IMDB en el esquema cleaned, se desarrollaron u
 las siguientes acciones de limpieza de las sietes estructuras. En términos generales, las rutinas implementadas corresponden a lo siguiente:
 
 * Para campos con caracteres "NA", introducidos en la etapa de pre-procesamiento de los archivos .tsv de la base IMDB (ver sección 5.2 y Anexo A), se establecieron valores nulos,
-* Para campos con caracteres "?????", introducidos en la etapa de pre-procesamiento de los archivos .tsv de la base IMDB (ver sección 5.2 y Anexo A), se sustituyeron por guiones bajos, [Pendiente: alinear con version final de limpie]
+* Para campos con caracteres "?????", introducidos en la etapa de pre-procesamiento de los archivos .tsv de la base IMDB (ver sección 5.2 y Anexo A), se sustituyeron por guiones bajos,
 * Trasformación del texto de los campos a minúsculas,
 * Se reemplazaron espacios de texto en los campos de las tablas por guiones bajos,
 * Se eliminaron acentos (correspondientes a los caracteres "\`" y "\´"),
-* [Pendiente: añadir más en caso de que se agreguen; en caso contrario eliminar bullet]
 
 El detalle específico de uso de estas acciones sobre las siete estructuras de datos de IMBD se refleja en los archivos *to_cleaned1.sql*, *to_cleaned2.sql* y *to_cleaned3.sql*.
 
+Cabe destacar que este proceso, se aprovecha la creación de índices que ayudarán a acelerar la consulta de información entre las tablas para el esquema semantic.
+
+A continuación se resumen la creación de los procesos creados en el código para auxiliarse con diversos índices que permiten acelarar la extracción de tablas desde clean para el esquema semantic:
+
+| proceso*    | tabla      | índices             |
+|-------------|------------|---------------------|
+| to_cleaned1 | localized  | title               |
+| to_cleaned1 | titles     | title type          |
+| to_cleaned2 | crew       | title               |
+| to_cleaned2 | episodes   | title parent        |
+| to_cleaned3 | principals | title category name |
+| to_cleaned3 | ratings    | title rating        |
+| to_cleaned3 | names      | name                |
+
+\*Nota: En este cuadro proceso se refiere a una función dentro Python que a través de Pyscopg2 manda a ejecutar scripts de sql que reciben el mismo nombre del proceso (es la función se llama to_clean1 manda llamar al archivo to_cleaned1.sql, y así sucesivamente).
+
 #### 4.6 Creación de semantic
 
-Por otra parte, de acuerdo la sección 2, las entidades se refieren a [Pendiente: alinear con sección 2] y los eventos corresponden a
- [Pendiente: alinear con seccion 2]. Es así que para representar tales estructuras, en términos generales se recurrió a las siguientes acciones:
+Por otra parte, de acuerdo la sección 2, las entidades se refieren a los directores de series y los eventos corresponden a
+ si estos dirigen en un determinado periodo de tiempo. Es así que para representar tales estructuras, en términos generales se recurrió a las siguientes acciones:
 
-**Entidades**
-* Dentro del esquema semantic, se creo una tabla denominada **[Pendiente]**,
-* Dicha tabla reúne la información de [Pendiente], la cual [Pendiente]
+ **Entidades**
+* Dentro del esquema semantic, se efectua la creación una tabla denominada *entities* que refleja las características estáticas de los directores previamente (ver sección 2):
+    * Nombre del director,
+    * Año de nacimiento,
+    * *Primary profesion*, el conjunto de actividades principales que desarrollar en las obras de entrentenimiento,
+    * El valor promedio de sus raitings,
 
 **Eventos**
-* Análogamente, dentro del esquema semantic, se creo una tabla denominada **[Pendiente]**,
-* Dicha tabla reúne la información de [Pendiente],
+* Análogamente, dentro del esquema semantic se crea una tabla denominada *events*, que describen si estas personas jugador el rol de en una ventana de tiempo dentro de un capítulo de una serie de cierto perfil:
 
-La implementación realizada se refleja en el archivo *to_semantic.sql*.
+* el nombre de la serie,
+* el año que inició y término de la serie,
+* el año del término de cada capítulo,
+* el número de la temporada y el episodio correspondiente,
+* el género de la serie,
+* si la serie es para adultos.
 
+La implementación realizada se refleja en los archivos *to_semantic1.sql* y *to_semantic2.sql*.
 
-Nuevamente, se destaca que la ejecución de las diferentes etapas del pipeline se describirá de manera específica en la sección 6 del presente documento.
+Cabe destacar que en dicho proceso, se aprovecha para la creación de índices que ayudarán a acelerar la consulta de información en etapas posteriores. A continuación se resumen la creación de los procesos en el código para auxiliarse con diversos índices que permiten acelerar la extracción de tablas desde semantic:
+
+| proceso*     | tabla    | índices                        |
+|--------------|----------|--------------------------------|
+| to_semantic1 | entities | birth primaryprofession        |
+| to_semantic2 | events   | startyear genre season episode |
+\*Nota: En este cuadro proceso se refiere a una función dentro Python que a través de Pyscopg2 manda a ejecutar scripts de sql que reciben el mismo nombre del proceso (es la función se llama to_semantic1 manda llamar al archivo to_semantic1.sql, y así sucesivamente).
+
+Asimismo, se destaca que la ejecución de las diferentes etapas del pipeline se describirá de manera específica en la sección 6 del presente documento.
 
 ### 5. Instalación
 
@@ -246,6 +298,12 @@ cd bin
 chmod +x setting_pyenv.sh # Permisos de ejecucion
 ./setting_pyenv.sh # Ejecuta el script de configuracion para el ambiente virtual
 ```
+**Nota sobre Pyenv**
+
+Para este p
+
+[Pendiente]
+
 
 #### 5.2 Descarga de datos IMDB y pre-pocesamiento
 
@@ -356,7 +414,8 @@ Por lo que hace a la creación del esquema semantic, dicha etapa se realiza con 
 **Creación de semantic: Paso 8**
 
 ```
-python imdb.py to-semantic
+python imdb.py to-semantic1
+python imdb.py to-semantic2
 ```
 
 ***
@@ -381,7 +440,7 @@ para el significado original de la base IMDB (véase el archivo *to_cleaned.sql*
 
 En complemento, durante la fase de exploración de los conjuntos de datos .tsv para su cargar en Postgres, ante la presencia de un caracter comilla (") se encontraron errores de reconocimiento adecuado del número columnas de las tablas o bien de valores ausentes.
 
-Para dar resolver tal incidencia, se recurrió a la siguiente estrategia: 1) previo a la etapa raw, sobre el cuerpo de cada archivo se realizaron sustituciones del caracter de doble comilla ("") por "?????". La implementación de ello se reflejó en el archivo Bash denominado *preparacion.sh*), mientras que  2) en la etapa cleaned se convirtieron a [Pendiente: especificar que se hizo] (véase el archivo *to_cleaned.sql*).
+Para dar resolver tal incidencia, se recurrió a la siguiente estrategia: 1) previo a la etapa raw, sobre el cuerpo de cada archivo se realizaron sustituciones del caracter de doble comilla ("") por "?????". La implementación de ello se reflejó en el archivo Bash denominado *preparacion.sh*), mientras que  2) en la etapa cleaned se convirtieron a guiones bajos (véase el archivo *to_cleaned.sql*).
 
 #### A.3 Consideraciones sobre el tamaño de los conjuntos de datos IMDB para su carga en raw
 
