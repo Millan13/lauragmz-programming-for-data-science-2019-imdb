@@ -144,6 +144,13 @@ def to_semantic2(ctx):
     with conn.cursor() as cur:
         cur.execute(query)
 
+@imdb.command()
+@click.pass_context
+def to_semantic3(ctx):
+    query = ctx.obj['queries'].get('to_semantic3')
+    conn = ctx.obj['conn']
+    with conn.cursor() as cur:
+        cur.execute(query)
+
 if __name__ == '__main__':
     imdb()
-

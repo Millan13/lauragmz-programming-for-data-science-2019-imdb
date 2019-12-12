@@ -35,8 +35,8 @@ begin
 	GROUP BY names.primaryname , names.birth , names.primaryprofession
   );
   
- -- create index semantic_entities_birth_ix on semantic.entities(birth);
- -- create index semantic_entities_primaryprofession_ix on semantic.entities(primaryprofession);
+  create index semantic_entities_birth_ix on semantic.entities(birth);
+  create index semantic_entities_primaryprofession_ix on semantic.entities(primaryprofession);
   
 
   end $semantic$;

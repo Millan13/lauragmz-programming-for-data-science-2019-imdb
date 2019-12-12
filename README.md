@@ -27,7 +27,7 @@ En este sentido, debe entenderse que los diferentes archivos y programas desarro
 git clone https://github.com/lauragmz/lauragmz-programming-for-data-science-2019-imdb
 ```
 
-Es así que a continuación se expondrá el enfoque seguido para el desarrollo del proyecto en comento.
+Es así que a continuación se expondrá el enfoque seguido para el desarrollo del proyecto en cuestión.
 
 ##### Nota sobre el equipo empleado para el desarrollo del proyecto
 
@@ -289,7 +289,8 @@ Por otra parte, de acuerdo la sección 2, las entidades se refieren a los direct
 * el género de la serie,
 * si la serie es para adultos.
 
-La implementación realizada se refleja en los archivos *to_semantic1.sql* y *to_semantic2.sql*.
+La implementación realizada se refleja en los archivos *to_semantic1.sql*, *to_semantic2.sql* y *to_semantic3.sql* (nota: debido a que se experimentaron problemas de memoria dentro de Vagrant la crear índice, la forma de solventarlo fue dividir el proceso de creación del
+esquema en varias subrutinas).
 
 Cabe destacar que en dicho proceso, se aprovecha para la creación de índices que ayudarán a acelerar la consulta de información en etapas posteriores. A continuación se resumen la creación de los procesos en el código para auxiliarse con diversos índices que permiten acelerar la extracción de tablas desde semantic:
 
@@ -429,8 +430,9 @@ Por lo que hace a la creación del esquema semantic, dicha etapa se realiza con 
 **Creación de semantic: Paso 8**
 
 ```
-python imdb.py to-semantic1
-python imdb.py to-semantic2
+python imdb.py to-semantic1 # primera etapa de creacion del esquema
+python imdb.py to-semantic2 # segunda etapa de creacion del esquema
+python imdb.py to-semantic3 # tercera etapa de creacion del esquema
 ```
 
 ***
