@@ -1,3 +1,7 @@
+##################### Nos ubicamos en el directorio principal ##############
+
+cd ..
+
 ##################### Descargamos los archivos que contienen la información de la base de datos
 
 #wget https://datasets.imdbws.com/name.basics.tsv.gz

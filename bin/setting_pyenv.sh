@@ -1,3 +1,7 @@
+# Nos situamos en el directorio principal
+
+cd ..
+
 # Instala version Python-3.7.3
 pyenv install 3.7.3
 
