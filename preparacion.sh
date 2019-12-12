@@ -8,14 +8,14 @@
 #wget https://datasets.imdbws.com/title.principals.tsv.gz
 #wget https://datasets.imdbws.com/title.ratings.tsv.gz
 
-
-curl gdrive.sh | bash -s https://drive.google.com/file/d/1q75xTG1scdrFtyZz3lwvDnDhJVyXM_oY/view?usp=sharing
-curl gdrive.sh | bash -s https://drive.google.com/file/d/1CeHQA2-nO0PLUREt68xmPN8lj1CqXKA0/view?usp=sharing
-curl gdrive.sh | bash -s https://drive.google.com/file/d/1JS14_6_eDTIKpc_utNgnbUp9eip2MJht/view?usp=sharing
-curl gdrive.sh | bash -s https://drive.google.com/file/d/1zXFlAzKSjwPkZSjpsRPsFSch54ICopwy/view?usp=sharing
-curl gdrive.sh | bash -s https://drive.google.com/file/d/1sD9SjfwlIR_8msSOqxoOoZdB9snBo9Aq/view?usp=sharing
-curl gdrive.sh | bash -s https://drive.google.com/file/d/1kG4jEVqIUeU8-T7zNr1q5zKMR5hq-gGd/view?usp=sharing
-curl gdrive.sh | bash -s https://drive.google.com/file/d/13JhxPS-XJBjlxW8OJSx5tS1cdwb8rnvu/view?usp=sharing
+# Se reemplazan link de descargas con las ultimas versiones de la base dado que el servidor arrojo errores; en caso que se desen probar basta descomentar lo de arriba y comentar las de abajo
+curl gdrive.sh | bash -s https://drive.google.com/file/d/1iLni46rXXwXlqLdU0xWK9zIilUKdpcnS/view?usp=sharing
+curl gdrive.sh | bash -s https://drive.google.com/file/d/1U8tYLyD8nwsU0vr-5AXjdM4QH5vPOcd2/view?usp=sharing
+curl gdrive.sh | bash -s https://drive.google.com/file/d/1PLFW26QYHpa-NigZuNyTL_8-kqkq2Tnz/view?usp=sharing
+curl gdrive.sh | bash -s https://drive.google.com/file/d/1NxdznWKuporOItQ84MEKN4zOsB6heLxj/view?usp=sharing
+curl gdrive.sh | bash -s https://drive.google.com/file/d/1uqkWrLHwCILNU0Exk0g3wwhXOuNC1ZtO/view?usp=sharing
+curl gdrive.sh | bash -s https://drive.google.com/file/d/1-gxrZSNvxqwTlQcJgrlQgPOuaTzjn046/view?usp=sharing
+curl gdrive.sh | bash -s https://drive.google.com/file/d/14xDrW_WZnxB3SgLOFKPHdJjF67XHWT3Q/view?usp=sharing
 
 ##################### Extraemos los archivos que están comprimidos
 
@@ -26,6 +26,7 @@ gunzip title.crew.tsv.gz
 gunzip title.episode.tsv.gz
 gunzip title.principals.tsv.gz
 gunzip title.ratings.tsv.gz
+
 
 
 ##################### Quitamos la primer línea de cada archivo (trabajaremos sin headers)
