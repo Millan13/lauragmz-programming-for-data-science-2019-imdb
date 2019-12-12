@@ -104,8 +104,24 @@ def cargar_tabla(ctx, data_file, nombre_tabla):
 
 @imdb.command()
 @click.pass_context
-def to_cleaned(ctx):
-    query = ctx.obj['queries'].get('to_cleaned')
+def to_cleaned1(ctx):
+    query = ctx.obj['queries'].get('to_cleaned1')
+    conn = ctx.obj['conn']
+    with conn.cursor() as cur:
+        cur.execute(query)
+
+@imdb.command()
+@click.pass_context
+def to_cleaned2(ctx):
+    query = ctx.obj['queries'].get('to_cleaned2')
+    conn = ctx.obj['conn']
+    with conn.cursor() as cur:
+        cur.execute(query)
+
+@imdb.command()
+@click.pass_context
+def to_cleaned3(ctx):
+    query = ctx.obj['queries'].get('to_cleaned3')
     conn = ctx.obj['conn']
     with conn.cursor() as cur:
         cur.execute(query)
