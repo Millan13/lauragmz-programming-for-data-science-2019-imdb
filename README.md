@@ -29,6 +29,25 @@ git clone https://github.com/lauragmz/lauragmz-programming-for-data-science-2019
 
 Es así que a continuación se expondrá el enfoque seguido para el desarrollo del proyecto en comento.
 
+##### Nota sobre el equipo empleado para el desarrollo del proyecto
+
+Se resalta que para trabajar de manera colectiva en el proyecto, todo el desarrollo fue probado en la máquina virtual Vagrant, considerando un ambiente virtual de Python (ver sección 5.1),
+ por lo que en caso de correrse en un equipo de manera local habrá que cerciorarse que este cuente con la herramientas necesarias de Python y PostgreSQL.
+
+De manera particular, para la instalación de manera local de Pyenv se pueden realizarse los siguientes pasos:
+
+```
+curl https://pyenv.run | bash # script de instalacion de pyenv
+# sudo rm -r /home/user/.pyenv # en caso de existir error ante la presencia del
+#archivo de configuración de pyenv, descomentar y sustituir
+
+# se agregan diferentes especificaciones para el
+# funcionamiento de Pyenv
+export PATH="/home/user/.pyenv/bin:$PATH"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
+```
+
 ### 1. Descripción de la fuente de datos
 
 IMDB contiene información relacionada con diferentes medios de entretenimiento visual, tales como películas, programas de televisión y video juegos; incluyendo casting, equipo de producción, biografías personales; así como información sobre los raitings (véase https://www.imdb.com/interfaces/#plain).
@@ -245,6 +264,7 @@ A continuación se resumen la creación de los procesos creados en el código pa
 | to_cleaned3 | ratings    | title rating        |
 | to_cleaned3 | names      | name                |
 
+
 \*Nota: En este cuadro proceso se refiere a una función dentro Python que a través de Pyscopg2 manda a ejecutar scripts de sql que reciben el mismo nombre del proceso (es la función se llama to_clean1 manda llamar al archivo to_cleaned1.sql, y así sucesivamente).
 
 #### 4.6 Creación de semantic
@@ -277,6 +297,8 @@ Cabe destacar que en dicho proceso, se aprovecha para la creación de índices q
 |--------------|----------|--------------------------------|
 | to_semantic1 | entities | birth primaryprofession        |
 | to_semantic2 | events   | startyear genre season episode |
+
+
 \*Nota: En este cuadro proceso se refiere a una función dentro Python que a través de Pyscopg2 manda a ejecutar scripts de sql que reciben el mismo nombre del proceso (es la función se llama to_semantic1 manda llamar al archivo to_semantic1.sql, y así sucesivamente).
 
 Asimismo, se destaca que la ejecución de las diferentes etapas del pipeline se describirá de manera específica en la sección 6 del presente documento.
@@ -298,12 +320,6 @@ cd bin
 chmod +x setting_pyenv.sh # Permisos de ejecucion
 ./setting_pyenv.sh # Ejecuta el script de configuracion para el ambiente virtual
 ```
-**Nota sobre Pyenv**
-
-Para este p
-
-[Pendiente]
-
 
 #### 5.2 Descarga de datos IMDB y pre-pocesamiento
 
