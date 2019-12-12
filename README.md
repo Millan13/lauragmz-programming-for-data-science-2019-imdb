@@ -112,7 +112,7 @@ De acuerdo a la información proporcionada para IMDB (ver https://www.imdb.com/i
 |------------|--------------------------------------------------------|---------------------------------------------------------------------------------|
 | titleid      | identificador del título                              |                                                                                 |
 | ordering   | identificador de las filas de un título                |                                                                                 |
-| title  | nombre adaptado del ttulo                              |                                                                                 |
+| title  | nombre adaptado del titulo                              |                                                                                 |
 | region     | región de la versión del título adaptado               |                                                                                 |
 | language   | idioma del título adaptado                             |                                                                                 |
 | types      | conjunto de atributos del título adaptado             | posibles valores "alternative", "dvd", "festival", "tv", "video", "working",etc |
@@ -124,7 +124,7 @@ De acuerdo a la información proporcionada para IMDB (ver https://www.imdb.com/i
 
 | **elemento**   | **descripción**                | **observación**                                                         |
 |----------------|--------------------------------|-------------------------------------------------------------------------|
-| tconst          | identificador del títutlo      |                                                                         |
+| tconst          | identificador del título      |                                                                         |
 | titletype      | tipo o formato del título      | posibles valores "movie", "short", "tvseries", "tvepisode", "video",etc |
 | primarytitle   | nombre más popular del título  |                                                                         |
 | originaltitle  | título en el idioma original  |                                                                         |
@@ -252,7 +252,7 @@ El detalle específico de uso de estas acciones sobre las siete estructuras de d
 
 Cabe destacar que este proceso, se aprovecha la creación de índices que ayudarán a acelerar la consulta de información entre las tablas para el esquema semantic.
 
-A continuación se resumen la creación de los procesos creados en el código para auxiliarse con diversos índices que permiten acelarar la extracción de tablas desde clean para el esquema semantic:
+A continuación se resumen la creación de los procesos creados en el código para auxiliarse con diversos índices que permiten acelerar la extracción de tablas desde clean para el esquema semantic:
 
 | proceso*    | tabla      | índices             |
 |-------------|------------|---------------------|
@@ -273,7 +273,7 @@ Por otra parte, de acuerdo la sección 2, las entidades se refieren a los direct
  si estos dirigen en un determinado periodo de tiempo. Es así que para representar tales estructuras, en términos generales se recurrió a las siguientes acciones:
 
  **Entidades**
-* Dentro del esquema semantic, se efectua la creación una tabla denominada *entities* que refleja las características estáticas de los directores previamente (ver sección 2):
+* Dentro del esquema semantic, se efectúa la creación una tabla denominada *entities* que refleja las características estáticas de los directores previamente (ver sección 2):
     * Nombre del director,
     * Año de nacimiento,
     * *Primary profesion*, el conjunto de actividades principales que desarrollar en las obras de entrentenimiento,
@@ -327,7 +327,7 @@ Por otra parte, siguiendo la documentación de IMDB, las direcciones electrónic
 
 Cabe destacar que, durante el proceso de exploración esta información para consolidar el esquema raw se encontraron algunos problemas para el funcionamiento de Postgres:
 
-i) **Errores de carga por presencia de caracteres "\N" o doble comilla ("):** Según la documentación de IMDB, el caracter "\N" se usa para denotar que cierto campo está ausente o no se encuentra disponible y algunos de los campos contienen texto que incorpora comillas que no abren o cierran por pares, como se haría usualmente en español; en ambos casos, ante la presencia de tales caracteres al importar los archivos .tsv correspondientes hacia Postgres, dicha herramienta arrojó errores en el reconocimiento de reglones con menos columnas de las que realmente definen a las tablas o posibles valores ausentes.
+i) **Errores de carga por presencia de caracteres "\N" o doble comilla ("):** Según la documentación de IMDB, el carácter "\N" se usa para denotar que cierto campo está ausente o no se encuentra disponible y algunos de los campos contienen texto que incorpora comillas que no abren o cierran por pares, como se haría usualmente en español; en ambos casos, ante la presencia de tales caracteres al importar los archivos .tsv correspondientes hacia Postgres, dicha herramienta arrojó errores en el reconocimiento de reglones con menos columnas de las que realmente definen a las tablas o posibles valores ausentes.
 
 ii) **Errores de carga en archivo que exceden cierto tamaño:** tres de los conjuntos de datos de IMDB exceden los 900 MB, por lo que el equipo en el que se trabajó (Vagrant) se quedaba sin memoria.
 
@@ -353,13 +353,12 @@ Notas: Aunque el tiempo de ejecución depende de diversos factores, como la velo
 
 Para llevar a cabo pipeline en cuestión, se implementó un archivo en Python denominado *imbd.py* que permite realizar de manera secuencial cada una de sus etapas (es decir, desde 4.1 hasta 4.6) de manera interactiva en la terminal. En términos generales, este archivo funciona a través de lo siguiente:
 
-* Usando los datos del rol creado en la instalación, **rol_IMDB** son usados para comunicarse con Postgres e interacturar con la base
-que queremos crear juntos con los esquemas correspondientes.
+* Usando los datos del rol creado en la instalación, **rol_IMDB** son usados para comunicarse con Postgres e interacturar con la base que queremos crear juntos con los esquemas correspondientes.
 * A través de Python ordenamos ejecutar la etapas descritas en secciones 4.1 a 4.6 del presente documento; de manera específica los
  archivos .sql descritos en el pipeline se ejecutan desde Python hacia Postgres usando psycopg2.
 
 Es necesario señalar que para la ejecución del pipeline, el usuario situarse con la terminal dentro de la carpeta principal del proyecto
-En este tenor, acontinuación se describirá los pasos necesarios para ejecutar cada etapa del pipeline para IMDB.
+En este tenor, a continuación se describirá los pasos necesarios para ejecutar cada etapa del pipeline para IMDB.
 
 #### 6.1 Creación de la base de datos y rol
 
